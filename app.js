@@ -10,7 +10,10 @@
 // 'node' yazarak nodeJs için oluşuturulan '.gitignore' dosyasını indiyoruz.
 
 // Sayfamızı github'a pushlamamız gerekir. Bunun için :
-// -> git status (status durumuna göz atmamız için)
+// -> git status (status durumuna göz atmamız için , değiştirilen dosyaları görmek için)
+// -> git add . (takip edilen , değiştirilen tüm dosyaları eklemek için)
+// -> git commit -m 'Workspace created'
+// -> git push (En sonunda da github'a pushlamak için)
 
 
 
