@@ -1,0 +1,30 @@
+{
+  "name": "nodejs-project-pcat",
+  "version": "1.0.0",
+  "description": "PCAT photo app with NodeJs",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oguzhan-tasci/PCAT.git"
+  },
+  "keywords": [
+    "photo",
+    "app",
+    "camera",
+    "back-end",
+    "nodejs",
+    "reusable"
+  ],
+  "author": "Oguzhan Tasci",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/oguzhan-tasci/PCAT/issues"
+  },
+  "homepage": "https://github.com/oguzhan-tasci/PCAT#readme",
+  "devDependencies": {
+    "prettier": "2.7.1"
+  }
+}
