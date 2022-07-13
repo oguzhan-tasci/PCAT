@@ -15,9 +15,39 @@
 // -> git commit -m 'Workspace created'
 // -> git push (En sonunda da github'a pushlamak için)
 
+// Uygulamamızı sürekli aç-kapat yapmak yerine otomatik olarak yenilenmesini istiyoruz.
+// Bu yüzden 'nodemon' package'ini indireceğiz. ---> npm i --save-dev nodemon
+// Daha sonra 'package.json'ın içindeki 'scripts' içine ekliyoruz : "start" : nodemon app.js
+// Artık terminale 'nodemon app.js' yazdığımız zaman server otomatik olarak başlıyacak ve her değişikliği algılayacak.
 
 
+const express = require('express');
+const ejs = require("ejs");
+const app = express();
 
-const fn = function () {
-    console.log("Function working");
-}
+
+app.set("view engine","ejs");
+
+app.use(express.static("public"));
+
+app.get('/', (req, res) => {
+   res.render('index');
+});
+
+app.get('/add_post', (req, res) => {
+    res.render('add_post');
+ });
+
+ app.get('/about', (req, res) => {
+    res.render('about');
+ });
+
+ app.get('*', (req, res) => {
+    res.send("404 ! SAYFA BULUNAMADI !");
+ });
+
+const port = 3000;
+
+app.listen(port, () => {
+    console.log(`Sunucu ${port} içerisinde calistirildi`);
+})
