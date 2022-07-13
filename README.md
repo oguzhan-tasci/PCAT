@@ -1,4 +1,4 @@
 # Clean Blog
 
-### I used NodeJS in order to create 'static' blog website.
+### I used NodeJS in order to create 'dynamic' blog website.
 
