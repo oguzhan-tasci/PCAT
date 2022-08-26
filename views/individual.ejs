@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('partials/_header') -%>
+
+  <body>
+    <%- include('partials/_nav') -%>
+
+    <div class="wrapper">
+      <h3>
+        <%= blog.title %>
+      </h3>
+      <p><%= blog.description %> </p>
+    </div>
+
+    <%- include('partials/_footer') -%>
+  </body>
+
+  <style>   
+    .wrapper {
+        display: grid;
+        grid-template-columns: 1fr;
+        align-items: center;
+        justify-items: center;
+        height: 100vh;
+        max-height: 1000px;
+        /* width: 100%; */
+        margin: auto;
+    }
+  </style>
+</html>

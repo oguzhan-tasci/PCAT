@@ -21,33 +21,86 @@
 // Artık terminale 'nodemon app.js' yazdığımız zaman server otomatik olarak başlıyacak ve her değişikliği algılayacak.
 
 
+const mongoose = require('mongoose');
 const express = require('express');
 const ejs = require("ejs");
 const app = express();
+const Blog = require('./model/Blog');
+const connectDB = require('./db/connection')
+require('dotenv').config()
 
 
-app.set("view engine","ejs");
-
+app.set("view engine", "ejs");
 app.use(express.static("public"));
+app.use(express.urlencoded({
+   extended: true
+}));
+app.use(express.json());
 
-app.get('/', (req, res) => {
-   res.render('index');
+app.get('/', async (req, res) => {
+   const blogs = await Blog.find({}).sort('-dateCreated');
+   res.render('index', {
+      blogs
+   })
+})
+
+app.get('/add_post', async (req, res) => {
+   res.render('add_post')
+})
+
+app.get('/about', async (req, res) => {
+   res.render('about')
+})
+
+
+
+
+app.get('/:id([0-9a-fA-F]{24})', async (req, res) => {
+   const blogID = req.params.id;
+   const blog = await Blog.findById(blogID);
+   res.render('individual', {
+      blog
+   })
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+app.post('/blog', async (req, res) => { // form'un içinde 'action'a verdiğim isim ile aynı işmi kullandık : "/blog"
+   const {
+      title,
+      description
+   } = req.body; // destructive yapısı olsa dahi, isimler aynı olmak zorunda otherwise 'undefined' :/:/::/
+   const blog = await Blog.create({
+      title,
+      description
+   });
+   res.redirect('/');
+})
+app.get('*', (req, res) => {
+   res.send("404 ! SAYFFA BULUNAMADI !");
 });
 
-app.get('/add_post', (req, res) => {
-    res.render('add_post');
- });
-
- app.get('/about', (req, res) => {
-    res.render('about');
- });
-
- app.get('*', (req, res) => {
-    res.send("404 ! SAYFA BULUNAMADI !");
- });
-
 const port = 3000;
-
-app.listen(port, () => {
-    console.log(`Sunucu ${port} içerisinde calistirildi`);
+connectDB(process.env.MONGO_URl).then(result => {
+   app.listen(port, () => {
+      console.log(`Server running on ${port}`)
+   })
+}).catch(error => {
+   console.log(error);
 })
